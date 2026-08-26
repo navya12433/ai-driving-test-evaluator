@@ -216,3 +216,17 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+# Model files (auto-downloaded, don't need to be in Git)
+yolov8n.pt
+*.task
+
+# Test/sample videos (large files, not source code)
+*.mp4
+*.mov
+*.avi
+
+# Uploaded video from Flask testing
+uploaded_video.mp4
+
+# Debug output
+debug_output.mp4
