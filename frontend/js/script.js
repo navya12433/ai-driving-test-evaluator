@@ -17,8 +17,11 @@ document.getElementById('evaluateBtn').addEventListener('click', async () => {
         });
         const data = await response.json();
 
-                const attention = data.driver_attention;
+        const attention = data.driver_attention;
         const lane = data.lane_discipline;
+        const safety = data.safety_checks;
+
+        const totalScore = attention.attention_score + lane.lane_discipline_score + safety.safety_score;
 
         document.getElementById('results').innerHTML = `
             <h2>Driver Attention Report</h2>
@@ -34,6 +37,15 @@ document.getElementById('evaluateBtn').addEventListener('click', async () => {
             <p>In Lane: ${lane.in_lane_frames}</p>
             <p>Out of Lane: ${lane.out_of_lane_frames}</p>
             <p><strong>Lane Discipline Score: ${lane.lane_discipline_score}/20</strong></p>
+
+            <h2>Safety Checks Report</h2>
+            <p>Analyzed Frames: ${safety.analyzed_frames}</p>
+            <p>Phone Usage Detected In: ${safety.phone_detected_frames} frames</p>
+            <p>Seatbelt Check: ${safety.seatbelt_check}</p>
+            <p><strong>Safety Score: ${safety.safety_score}/20</strong></p>
+
+            <hr>
+            <h2>Overall Score: ${totalScore}/60</h2>
         `;
     } catch (error) {
         document.getElementById('results').innerText = 'Error: ' + error.message;
