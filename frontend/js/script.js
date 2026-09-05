@@ -1,4 +1,3 @@
-
 document.getElementById('evaluateBtn').addEventListener('click', async () => {
     const file = document.getElementById('videoUpload').files[0];
     if (!file) {
@@ -22,8 +21,15 @@ document.getElementById('evaluateBtn').addEventListener('click', async () => {
         const lane = data.lane_discipline;
         const safety = data.safety_checks;
         const signal = data.signal_compliance;
+        const unsafe = data.unsafe_behavior;
 
-        const totalScore = attention.attention_score + lane.lane_discipline_score + safety.safety_score + signal.signal_compliance_score;
+        const totalScore = attention.attention_score
+            + lane.lane_discipline_score
+            + safety.safety_score
+            + signal.signal_compliance_score
+            + unsafe.unsafe_behavior_score;
+
+        const passFail = totalScore >= 50 ? "PASS" : "FAIL";
 
         document.getElementById('results').innerHTML = `
             <h2>Driver Attention Report</h2>
@@ -52,8 +58,14 @@ document.getElementById('evaluateBtn').addEventListener('click', async () => {
             <p>Violation Frames: ${signal.violation_frames}</p>
             <p><strong>Signal Compliance Score: ${signal.signal_compliance_score}/20</strong></p>
 
+            <h2>Unsafe Behavior Report</h2>
+            <p>Analyzed Frames: ${unsafe.analyzed_frames}</p>
+            <p>Unsafe Event Frames: ${unsafe.unsafe_event_frames}</p>
+            <p><strong>Unsafe Behavior Score: ${unsafe.unsafe_behavior_score}/20</strong></p>
+
             <hr>
-            <h2>Overall Score: ${totalScore}/80</h2>
+            <h2>Total Score: ${totalScore}/100</h2>
+            <h2>Result: ${passFail}</h2>
         `;
     } catch (error) {
         document.getElementById('results').innerText = 'Error: ' + error.message;
