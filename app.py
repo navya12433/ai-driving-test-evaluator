@@ -1,4 +1,3 @@
-
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import sys
@@ -10,6 +9,7 @@ from driver_attention import analyze_driver_attention
 from lane_discipline import analyze_lane_discipline
 from safety_checks import analyze_safety_checks
 from signal_compliance import analyze_signal_compliance
+from unsafe_behavior import analyze_unsafe_behavior
 
 app = Flask(__name__)
 CORS(app)
@@ -32,11 +32,14 @@ def evaluate():
 
     signal_result = analyze_signal_compliance(video_path)
 
+    unsafe_result = analyze_unsafe_behavior(video_path)
+
     return jsonify({
         "driver_attention": attention_result,
         "lane_discipline": lane_result,
         "safety_checks": safety_result,
-        "signal_compliance": signal_result
+        "signal_compliance": signal_result,
+        "unsafe_behavior": unsafe_result
     })
 
 if __name__ == '__main__':
