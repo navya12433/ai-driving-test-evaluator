@@ -11,7 +11,7 @@ from safety_checks import analyze_safety_checks
 from signal_compliance import analyze_signal_compliance
 from unsafe_behavior import analyze_unsafe_behavior
 
-from database import init_db, save_evaluation
+from database import init_db, save_evaluation, get_all_evaluations
 
 app = Flask(__name__)
 CORS(app)
@@ -71,6 +71,10 @@ def evaluate():
         "total_score": total_score,
         "result": result_label
     })
+
+@app.route('/history', methods=['GET'])
+def history():
+    return jsonify(get_all_evaluations())
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=False)

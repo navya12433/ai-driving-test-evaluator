@@ -235,6 +235,37 @@ body {
     border: 1px solid var(--fail);
 }
 
+.back-link {
+    margin: -24px 0 24px;
+}
+
+.back-link a {
+    color: var(--ink-muted);
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.back-link a:hover {
+    color: var(--marking);
+}
+
+.history-nav {
+    text-align: center;
+    margin: -20px 0 32px;
+}
+
+.history-nav a {
+    color: var(--ink-muted);
+    text-decoration: none;
+    font-size: 14px;
+    border-bottom: 1px dashed var(--panel-line);
+    padding-bottom: 2px;
+}
+
+.history-nav a:hover {
+    color: var(--marking);
+}
+
 .error {
     color: var(--fail);
     text-align: center;
