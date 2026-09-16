@@ -230,3 +230,7 @@ uploaded_video.mp4
 
 # Debug output
 debug_output.mp4
+uploaded_*.mp4
+results.db
+__pycache__/
+*.pyc
